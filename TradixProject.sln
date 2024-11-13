@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradixProject.EntityLayer", "TradixProject.EntityLayer\TradixProject.EntityLayer.csproj", "{46F0A72F-59BA-46E4-B2F8-1084405DD2DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradixProject.EntityLayer", "TradixProject.EntityLayer\TradixProject.EntityLayer.csproj", "{46F0A72F-59BA-46E4-B2F8-1084405DD2DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradixProject.DataAccessLayer", "TradixProject.DataAccessLayer\TradixProject.DataAccessLayer.csproj", "{B0C7BD96-FE9A-496D-B1C7-7C3D8D92C3DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradixProject.DataAccessLayer", "TradixProject.DataAccessLayer\TradixProject.DataAccessLayer.csproj", "{B0C7BD96-FE9A-496D-B1C7-7C3D8D92C3DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradixProject.BusinessLayer", "TradixProject.BusinessLayer\TradixProject.BusinessLayer.csproj", "{5208E446-F300-4B23-BFCB-67EF5A000D72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradixProject.BusinessLayer", "TradixProject.BusinessLayer\TradixProject.BusinessLayer.csproj", "{5208E446-F300-4B23-BFCB-67EF5A000D72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradixProject.DtoLayer", "TradixProject.DtoLayer\TradixProject.DtoLayer.csproj", "{B50AEEC0-0266-449C-9AA2-5BED85B2B3D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TradixProject.DtoLayer", "TradixProject.DtoLayer\TradixProject.DtoLayer.csproj", "{B50AEEC0-0266-449C-9AA2-5BED85B2B3D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradixProject.PresentationLayer", "TradixProject.PresentationLayer\TradixProject.PresentationLayer.csproj", "{9F4331CB-B615-4598-9180-AD5E97F51D16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TradixProjectPresentationLayer", "TradixProjectPresentationLayer\TradixProjectPresentationLayer.csproj", "{5D94E773-00EB-4788-9B23-4730615692C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{B50AEEC0-0266-449C-9AA2-5BED85B2B3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B50AEEC0-0266-449C-9AA2-5BED85B2B3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B50AEEC0-0266-449C-9AA2-5BED85B2B3D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F4331CB-B615-4598-9180-AD5E97F51D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F4331CB-B615-4598-9180-AD5E97F51D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F4331CB-B615-4598-9180-AD5E97F51D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F4331CB-B615-4598-9180-AD5E97F51D16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D94E773-00EB-4788-9B23-4730615692C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D94E773-00EB-4788-9B23-4730615692C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D94E773-00EB-4788-9B23-4730615692C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D94E773-00EB-4788-9B23-4730615692C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
