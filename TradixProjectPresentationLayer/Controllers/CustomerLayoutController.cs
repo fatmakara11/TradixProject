@@ -1,18 +1,4 @@
-﻿/*using Microsoft.AspNetCore.Mvc;
-
-using Microsoft.AspNetCore.Mvc;
-
-namespace TradixProjectPresentationLayer.Controllers
-{
-    public class CustomerLayoutController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-    }
-}*/
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Data.SqlClient;
@@ -41,19 +27,26 @@ namespace TradixProjectPresentationLayer.Controllers
 
             try
             {
+                // TCMB verilerini çekiyoruz
                 var response = await _httpClient.GetStringAsync(url);
                 XDocument xmlDoc = XDocument.Parse(response);
 
+                // XML'den döviz verilerini alıyoruz
                 var currencyData = xmlDoc.Descendants("Currency")
                     .Select(c => new
                     {
                         CurrencyCode = c.Attribute("CurrencyCode")?.Value,
                         Unit = c.Element("Unit")?.Value,
                         CurrencyName = c.Element("Isim")?.Value,
-                        ForexBuying = c.Element("ForexBuying")?.Value,
-                        ForexSelling = c.Element("ForexSelling")?.Value
+                        ForexBuying = decimal.TryParse(c.Element("ForexBuying")?.Value, out var forexBuying) ? forexBuying : (decimal?)null,
+                        ForexSelling = decimal.TryParse(c.Element("ForexSelling")?.Value, out var forexSelling) ? forexSelling : (decimal?)null
                     }).ToList();
 
+                // Verileri ViewBag ile view'e gönderiyoruz
+                ViewBag.ExchangeRates = currencyData;
+                ViewBag.Message = "Döviz kurları başarıyla çekildi ve kaydedildi.";
+
+                // Verileri SQL Server'a kaydediyoruz
                 using (var connection = new SqlConnection(_connectionString))
                 {
                     connection.Open();
@@ -76,8 +69,6 @@ namespace TradixProjectPresentationLayer.Controllers
                         }
                     }
                 }
-
-                ViewBag.Message = "Döviz kurları başarıyla çekildi ve kaydedildi.";
             }
             catch (Exception ex)
             {

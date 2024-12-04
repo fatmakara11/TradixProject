@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿/*using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,3 +21,25 @@ namespace TradixProject.DataAccessLayer.Concrete
 }
     
 
+*/
+using Intuit.Ipp.Data;
+using Microsoft.EntityFrameworkCore;
+using TradixProject.DataAccessLayer.Repositories;
+
+namespace TradixProject.DataAccessLayer.Concrete
+{
+    public class Context : DbContext
+    {
+        public DbSet<ExchangeRate> ExchangeRates { get; set; }  // ExchangeRate tablosu için DbSet
+
+        // Diğer DbSet'ler burada yer alabilir
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("server=FATMA\\SQLEXPRESS;initial catalog=TradixProjectDb;integrated Security=true;TrustServerCertificate=True");
+            }
+        }
+    }
+}
