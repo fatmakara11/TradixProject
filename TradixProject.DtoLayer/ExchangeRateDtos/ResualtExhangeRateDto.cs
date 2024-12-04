@@ -8,7 +8,7 @@ namespace TradixProject.DtoLayer.ExchangeRateDtos
 {
     public class ResualtExhangeRateDto
     {
-        public int Id { get; set; }
+            public int Id { get; set; }
         public string CurrencyCode { get; set; }
         public string Unit { get; set; }
         public string CurrencyName { get; set; }

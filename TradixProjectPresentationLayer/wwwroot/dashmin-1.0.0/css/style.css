@@ -276,3 +276,31 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+
+
+
+.card {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+}
+
+.card-title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem 0;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.row {
+    margin-top: 20px;
+}

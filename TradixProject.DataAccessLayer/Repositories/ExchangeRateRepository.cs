@@ -1,63 +1,45 @@
-﻿using Intuit.Ipp.Data;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using TradixProject.DataAccessLayer.Concrete;
+﻿using System.Data.SqlClient;
 using TradixProject.DtoLayer.ExchangeRateDtos;
 
-namespace TradixProject.DataAccessLayer.Repositories
+public class ExchangeRateRepository
 {
-    public class ExchangeRateRepository
+    private readonly string _connectionString;
+
+    public ExchangeRateRepository(string connectionString)
     {
-        private readonly string _connectionString;
+        _connectionString = connectionString;
+    }
 
-        // Connection string, genellikle appsettings.json'dan alınır
-        public ExchangeRateRepository(string connectionString)
+    public List<ResualtExhangeRateDto> GetExchangeRates()
+    {
+        var exchangeRates = new List<ResualtExhangeRateDto>();
+
+        using (var connection = new SqlConnection(_connectionString))
         {
-            _connectionString = connectionString;
-        }
+            connection.Open();
+            string query = "SELECT Id, CurrencyCode, Unit, CurrencyName, ForexBuying, ForexSelling, CreatedDate FROM ExchangeRates";
 
-        // ExchangeRates verilerini çekme
-        public List<ResualtExhangeRateDto> GetExchangeRates()
-        {
-            var exchangeRates = new List<ResualtExhangeRateDto>();
-
-            // SQL bağlantısını açıyoruz
-            using (var connection = new SqlConnection(_connectionString))
+            using (var command = new SqlCommand(query, connection))
             {
-                connection.Open();
-
-                // SQL sorgusunu tanımlıyoruz
-                string query = "SELECT * FROM ExchangeRates"; // Veritabanındaki doğru tabloyu ve alanları kullanın
-
-                using (var command = new SqlCommand(query, connection))
+                using (var reader = command.ExecuteReader())
                 {
-                    // Sorguyu çalıştırıyoruz
-                    using (var reader = command.ExecuteReader())
+                    while (reader.Read())
                     {
-                        // Veriyi okuyup DTO'ya dönüştürüyoruz
-                        while (reader.Read())
+                        exchangeRates.Add(new ResualtExhangeRateDto
                         {
-                            var exchangeRate = new ResualtExhangeRateDto
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                                CurrencyCode = reader.GetString(reader.GetOrdinal("CurrencyCode")),
-                                Unit = reader.GetString(reader.GetOrdinal("Unit")),
-                                CurrencyName = reader.GetString(reader.GetOrdinal("CurrencyName")),
-                                ForexBuying = reader.IsDBNull(reader.GetOrdinal("ForexBuying")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("ForexBuying")),
-                                ForexSelling = reader.IsDBNull(reader.GetOrdinal("ForexSelling")) ? (decimal?)null : reader.GetDecimal(reader.GetOrdinal("ForexSelling")),
-                                CreatedDate = reader.GetDateTime(reader.GetOrdinal("CreatedDate"))
-                            };
-
-                            exchangeRates.Add(exchangeRate);
-                        }
+                            Id = reader.GetInt32(0),
+                            CurrencyCode = reader.GetString(1),
+                            Unit = reader.GetString(2),
+                            CurrencyName = reader.GetString(3),
+                            ForexBuying = reader.IsDBNull(4) ? null : reader.GetDecimal(4),
+                            ForexSelling = reader.IsDBNull(5) ? null : reader.GetDecimal(5),
+                            CreatedDate = reader.GetDateTime(6)
+                        });
                     }
                 }
             }
-
-            return exchangeRates;
         }
-    }
 
+        return exchangeRates;
+    }
 }
