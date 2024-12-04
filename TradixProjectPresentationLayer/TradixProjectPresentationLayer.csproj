@@ -415,7 +415,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -423,10 +424,6 @@
     <ProjectReference Include="..\TradixProject.DataAccessLayer\TradixProject.DataAccessLayer.csproj" />
     <ProjectReference Include="..\TradixProject.DtoLayer\TradixProject.DtoLayer.csproj" />
     <ProjectReference Include="..\TradixProject.EntityLayer\TradixProject.EntityLayer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewComponents\" />
   </ItemGroup>
 
 </Project>

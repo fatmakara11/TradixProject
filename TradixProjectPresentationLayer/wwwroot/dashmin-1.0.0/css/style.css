@@ -150,7 +150,8 @@
 
 .sidebar .navbar .navbar-nav .nav-link:hover i,
 .sidebar .navbar .navbar-nav .nav-link.active i {
-    background: var(--light);
+   /* background: var(--light);*/
+   background:var(--dark);
 }
 
 .sidebar .navbar .dropdown-toggle::after {
