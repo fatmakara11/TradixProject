@@ -13,7 +13,7 @@ namespace TradixProject.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=FATMA\\SQLEXPRESS;initial catalog=TradixProjectDb;integrated Security=true;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("server=FATMA\\SQLEXPRESS;initial catalog=ExchangeRates;integrated Security=true;TrustServerCertificate=True");
 
         }
         public DbSet<Class1> Class1Entities { get; set; }  // Class1 için DbSet tanımı
@@ -30,7 +30,8 @@ namespace TradixProject.DataAccessLayer.Concrete
 {
     public class Context : DbContext
     {
-        public DbSet<ExchangeRate> ExchangeRates { get; set; }  // ExchangeRate tablosu için DbSet
+        public DbSet<ExchangeRate> ExchangeRate
+        { get; set; }  // ExchangeRate tablosu için DbSet
 
         // Diğer DbSet'ler burada yer alabilir
 
@@ -38,7 +39,7 @@ namespace TradixProject.DataAccessLayer.Concrete
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("server=FATMA\\SQLEXPRESS;initial catalog=TradixProjectDb;integrated Security=true;TrustServerCertificate=True");
+                optionsBuilder.UseSqlServer("server=FATMA\\SQLEXPRESS;initial catalog=ExchangeRates;integrated Security=true;TrustServerCertificate=True");
             }
         }
     }

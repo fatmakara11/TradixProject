@@ -1,18 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using TradixProjectPresentationLayer.Models;
-
 
 namespace TradixProjectPresentationLayer.Controllers
 {
     public class CustomerLayoutController : Controller
     {
-        private readonly string _connectionString = "Server=FATMA\\SQLEXPRESS;Database=TradixProjectDb;Integrated Security=True;TrustServerCertificate=True;";
+        // Veritabanı bağlantı stringi
+        private readonly string _connectionString = "Server=FATMA\\SQLEXPRESS;Database=ExchangeRate;Integrated Security=True;TrustServerCertificate=True;";
 
         public IActionResult Index()
         {
-            List<dynamic> exchangeRates = new List<dynamic>();
+            List<GunDoviz> gunDovizData = new();
+
+            // Tablo adları
+            var tableNames = new List<string>
+            {
+                "[dbo].[1.gündöviz]", "[dbo].[2.gündöviz]", "[dbo].[3.gündöviz]", "[dbo].[4.gündöviz]",
+                "[dbo].[5.gündöviz]", "[dbo].[6.gündöviz]", "[dbo].[7.gündöviz]", "[dbo].[8.gündöviz]", "[dbo].[9.gündöviz]"
+            };
 
             try
             {
@@ -20,36 +28,49 @@ namespace TradixProjectPresentationLayer.Controllers
                 {
                     connection.Open();
 
-                    string query  = "SELECT Id, CurrencyCode, Unit, CurrencyName,ForexBuying,ForexSelling, CreatedDate FROM ExchangeRates";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    // Her bir tabloyu döngüyle sorgulama
+                    foreach (var tableName in tableNames)
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        // SQL Sorgusu
+                        string query = $"SELECT TOP (1000) [DövizAdi], [Alis], [Satis], [% Fark], [Tarih] FROM {tableName}";
+
+                        using (SqlCommand command = new SqlCommand(query, connection))
                         {
-                            while (reader.Read())
+                            using (SqlDataReader reader = command.ExecuteReader())
                             {
-                                exchangeRates.Add(new
+                                while (reader.Read())
                                 {
-                                    Id = reader["Id"],
-                                    CurrencyCode = reader["CurrencyCode"],
-                                    Unit = reader["Unit"],
-                                    CurrencyName = reader["CurrencyName"],
-                                    ForexBuying = reader["ForexBuying"],
-                                    ForexSelling = reader["ForexSelling"],
-                                    CreatedDate = reader["CreatedDate"]
-                                });
+                                    decimal alis = 0, satis = 0, fark = 0;
+                                    DateTime tarih = DateTime.MinValue;
+
+                                    // Alış, Satış, Fark ve Tarih alanlarının null olup olmadığını kontrol et
+                                    decimal.TryParse(reader["Alis"]?.ToString(), out alis);
+                                    decimal.TryParse(reader["Satis"]?.ToString(), out satis);
+                                    decimal.TryParse(reader["% Fark"]?.ToString(), out fark);
+                                    DateTime.TryParse(reader["Tarih"]?.ToString(), out tarih);
+
+                                    // Veriyi listeye ekleyin
+                                    gunDovizData.Add(new GunDoviz
+                                    {
+                                        DovizAdi = reader["DövizAdi"] as string ?? string.Empty,
+                                        Alis = alis,
+                                        Satis = satis,
+                                        Fark = fark,
+                                        Tarih = tarih
+                                    });
+                                }
                             }
                         }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
-                ViewBag.ErrorMessage = "Bir hata oluştu: " + ex.Message;
+                ViewBag.ErrorMessage = ex.Message;
             }
 
-            ViewBag.ExchangeRates = exchangeRates;
-            return View();
+            // Verileri View'a gönderiyoruz
+            return View(gunDovizData);
         }
     }
-
 }

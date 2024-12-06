@@ -267,7 +267,6 @@
     margin: 0 5px;
     width: 15px;
     height: 15px;
-
     border: 5px solid var(--primary);
     border-radius: 15px;
     transition: .5s;
