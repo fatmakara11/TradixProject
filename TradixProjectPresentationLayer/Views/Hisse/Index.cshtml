@@ -1,0 +1,210 @@
+﻿<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<style>
+    body {
+        background-color: #121212;
+        color: #fff;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .hisseler-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-top: 20px;
+        padding: 0 10px;
+    }
+
+    .hisse-card {
+        background-color: #1a1a1a;
+        border: 2px solid #333;
+        border-radius: 10px;
+        padding: 20px;
+        width: 300px; /* Increased width */
+        margin: 10px;
+        box-shadow: 0 4px 10px rgba(0, 255, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .hisse-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0, 255, 255, 0.5);
+        }
+
+    .hisse-header h4 {
+        font-size: 1.2rem;
+        color: #00ffff;
+        margin-bottom: 10px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .hisse-body p {
+        color: #ccc;
+        font-size: 0.9rem;
+        margin: 5px 0;
+    }
+
+    .graph-button {
+        background-color: #00ffff;
+        color: #121212;
+        border: none;
+        padding: 8px 16px; /* Smaller button */
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 0.9rem; /* Smaller font size */
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+        .graph-button:hover {
+            background-color: #33ffff;
+            transform: scale(1.05);
+        }
+
+    .no-data {
+        text-align: center;
+        color: #ccc;
+        font-size: 1.2rem;
+        margin-top: 20px;
+    }
+
+    .alert-danger {
+        color: red;
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    .modal-content {
+        background-color: #1a1a1a;
+        color: #fff;
+    }
+
+    .modal-header {
+        background-color: #333;
+        border-bottom: 1px solid #444;
+    }
+
+    .modal-title {
+        color: #00ffff;
+    }
+
+    .close {
+        color: #00ffff;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    canvas {
+        width: 100%;
+        height: 300px;
+    }
+
+    .section-heading {
+        font-size: 1.8rem;
+        color: #00ffff;
+        text-align: center;
+        margin-top: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+</style>
+@{
+    var exchangeRates = ViewBag.ExchangeRates1 as List<TradixProjectPresentationLayer.Models.Hisse>;
+    var errorMessage = ViewBag.ErrorMessage as string;
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
+else
+{
+    <div class="section-heading">Hisseler</div> <!-- Added the heading -->
+
+    <div class="hisseler-container">
+        @if (exchangeRates != null && exchangeRates.Count > 0)
+        {
+            foreach (var rate in exchangeRates)
+            {
+                <div class="hisse-card">
+                    <div class="hisse-header">
+                        <h4>@rate.CurrencyName</h4>
+                    </div>
+                    <div class="hisse-body">
+                        <p><strong>Currency Code:</strong> @rate.CurrencyCode</p>
+                        <p><strong>Unit:</strong> @rate.Unit</p>
+                        <p><strong>Forex Buying:</strong> @rate.ForexBuying</p>
+                        <p><strong>Forex Selling:</strong> @rate.ForexSelling</p>
+                        <p><strong>Created Date:</strong> @rate.CreatedDate</p>
+                    </div>
+                    <button class="graph-button" data-toggle="modal" data-target="#graphModal-@rate.CurrencyCode">Grafiğini Görüntüle</button>
+                </div>
+
+                <!-- Grafik Modalı -->
+                <!-- Grafik Modalı -->
+                <div class="modal fade" id="graphModal-@rate.CurrencyCode" tabindex="-1" role="dialog" aria-labelledby="graphModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="graphModalLabel">@rate.CurrencyName - Grafik</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <canvas id="chart-@rate.CurrencyCode"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="no-data">
+                <p>Veri bulunamadı.</p>
+            </div>
+        }
+    </div>
+}
+
+<!-- Chart.js Kütüphanesi -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                            <script>
+  // Modal açıldığında grafik oluşturma
+  var myModal = document.getElementById('myModal');
+  myModal.addEventListener('shown.bs.modal', function () {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'bar', // Grafik türü (bar, line, pie, vb.)
+      data: {
+        labels: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran'], // X eksenindeki etiketler
+        datasets: [{
+          label: 'Satış Miktarı',
+          data: [12, 19, 3, 5, 2, 3], // Y eksenindeki veriler
+          backgroundColor: 'rgba(54, 162, 235, 0.2)', // Çubukların arka plan rengi
+          borderColor: 'rgba(54, 162, 235, 1)', // Çubukların kenar rengi
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true // Y ekseni sıfırdan başlasın
+          }
+        }
+      }
+    });
+  });
+</script>

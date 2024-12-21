@@ -1,0 +1,114 @@
+﻿@model IEnumerable<TradixProjectPresentationLayer.Models.KriptoPara>
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kripto Para Listeleme</title>
+    <style>
+        /* Genel Sayfa Stili */
+        body {
+            background-color: #F3F6F9;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #009CFF;
+        }
+
+        /* Sayfa İçeriği */
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+            margin-left: 250px; /* Sidebar genişliği kadar boşluk bırak */
+            margin-right: 20px; /* Sağ tarafta biraz boşluk bırak */
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Kartların Konteyneri */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Kartlar arasında boşluk */
+            justify-content: flex-start; /* Kartları sola hizala */
+        }
+
+        /* Kart Stili */
+        .card {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: calc(33.33% - 15px); /* 3 sütun yapısı */
+            box-sizing: border-box;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-header {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #009CFF;
+        }
+
+        .card-content {
+            text-align: center;
+        }
+
+            .card-content span {
+                font-size: 1.1em;
+                margin: 5px 0;
+            }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-content">
+        <h2>Kripto Para Listesi</h2>
+        <div class="container">
+            <div class="row">
+                @foreach (var kripto in Model)
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            @kripto.KriptoAdi
+                        </div>
+                        <div class="card-content">
+                            <span><strong>Alış Fiyatı:</strong> @string.Format("{0:C}", kripto.AlisFiyati)</span>
+                            <span><strong>Satış Fiyatı:</strong> @string.Format("{0:C}", kripto.SatisFiyati)</span>
+                            <span><strong>Piyasa Değeri:</strong> @(kripto.PiyasaDegeri.HasValue ? string.Format("{0:C}", kripto.PiyasaDegeri) : "N/A")</span>
+                            <span><strong>Günlük Hacim:</strong> @(kripto.GunlukHacim.HasValue ? string.Format("{0:C}", kripto.GunlukHacim) : "N/A")</span>
+                            <span><strong>Değişim (%):</strong> @(kripto.DegisimYuzdesi.HasValue ? kripto.DegisimYuzdesi + "%" : "N/A")</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

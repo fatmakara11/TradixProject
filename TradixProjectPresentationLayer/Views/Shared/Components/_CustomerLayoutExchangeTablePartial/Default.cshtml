@@ -1,111 +1,276 @@
-﻿<div style="width: 80%; margin: auto;">
+﻿@model List<HistoricalMarketData>
+
+@{
+    ViewData["Title"] = "12 Aylık Değişim Grafiği";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiyat Değişimi Grafik</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            margin-top:50px;
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .chart-box {
+            width: 45%;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
    
 
-    <!-- Günlük Değişim Grafiği -->
-    <h2>Günlük Değişim</h2>
-    <canvas id="dailyChart"></canvas>
+    <div class="chart-container">
+        <!-- Günlük Değişim Grafikleri -->
+        <div class="chart-box">
+            <canvas id="dailyGoldChart"></canvas>
+            <h3>Günlük Değişim - Altın (USD)</h3>
+        </div>
+        <div class="chart-box">
+            <canvas id="dailyBitcoinChart"></canvas>
+            <h3>Günlük Değişim - Bitcoin (BTC)</h3>
+        </div>
+        <div class="chart-box">
+            <canvas id="dailyEuroChart"></canvas>
+            <h3>Günlük Değişim - Euro (EUR)</h3>
+        </div>
+        <div class="chart-box">
+            <canvas id="dailyEthereumChart"></canvas>
+            <h3>Günlük Değişim - Ethereum (ETH)</h3>
+        </div>
+    </div>
 
-    <!-- Aylık Değişim Grafiği -->
-    <h2>Aylık Değişim</h2>
-    <canvas id="monthlyChart"></canvas>
-</div>
+    <div class="chart-container">
+        <!-- Aylık Değişim Grafikleri -->
+        <div class="chart-box">
+            <canvas id="monthlyGoldChart"></canvas>
+            <h3>Aylık Değişim - Altın (USD)</h3>
+        </div>
+        <div class="chart-box">
+            <canvas id="monthlyBitcoinChart"></canvas>
+            <h3>Aylık Değişim - Bitcoin (BTC)</h3>
+        </div>
+        <div class="chart-box">
+            <canvas id="monthlyEuroChart"></canvas>
+            <h3>Aylık Değişim - Euro (EUR)</h3>
+        </div>
+        <div class="chart-box">
+            <canvas id="monthlyEthereumChart"></canvas>
+            <h3>Aylık Değişim - Ethereum (ETH)</h3>
+        </div>
+    </div>
 
-<!-- Grafik Altındaki Alan -->
-<div style="width: 80%; margin: auto; margin-top: 20px;">
-    <p><strong>Grafik Açıklaması:</strong> Altının günlük ve aylık fiyat değişimlerini gösteren grafikler yukarıda yer almaktadır.</p>
-    <p><strong>Not:</strong> Günlük grafik, belirli bir dönemdeki günlük açılış fiyatlarına dayalı olarak oluşturulmuştur, aylık grafik ise aylık değişimleri göstermektedir.</p>
-</div>
+    <script>
+        // Altın (USD) Verileri
+        const dailyGoldUSD = [1800, 1795, 1803, 1798, 1805, 1810, 1807, 1812, 1809, 1815];
+        const monthlyGoldUSD = [1800, 1790, 1820, 1850, 1900, 1950, 2000, 2050, 2100, 2150, 2200, 2250];
 
-<script>
-    // Günlük veriler
-    const dailyFiyatlar = [
-        2941, 2937, 2933, 2906, 3018, 2963, 2941, 2923, 2904,
-        2846, 2848, 2839, 2873, 2896, 2967, 2990, 2929, 3027,
-        3021, 3023, 3028
-    ];
-    const dailyTarihler = [
-        "29.11.2024", "28.11.2024", "27.11.2024", "26.11.2024", "25.11.2024",
-        "22.11.2024", "21.11.2024", "20.11.2024", "19.11.2024", "18.11.2024",
-        "15.11.2024", "14.11.2024", "13.11.2024", "12.11.2024", "11.11.2024",
-        "08.11.2024", "07.11.2024", "06.11.2024", "05.11.2024", "04.11.2024",
-        "01.11.2024"
-    ];
+        // Bitcoin (BTC) Verileri
+        const dailyBitcoin = [30000, 30500, 30800, 30750, 31000, 31500, 31200, 31800, 32000, 32500];
+        const monthlyBitcoin = [30000, 29500, 31000, 32000, 33000, 34000, 35000, 36000, 37000, 38000, 39000, 40000];
 
-    // Aylık veriler (her ayın başındaki fiyat)
-    const monthlyFiyatlar = [
-        2900, 2950, 3000, 3050, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800
-    ];
-    const monthlyTarihler = [
-        "Kasım 2024", "Ekim 2024", "Eylül 2024", "Ağustos 2024", "Temmuz 2024",
-        "Haziran 2024", "Mayıs 2024", "Nisan 2024", "Mart 2024", "Şubat 2024",
-        "Ocak 2024", "Aralık 2023"
-    ];
+        // Euro (EUR) Verileri
+        const dailyGoldEUR = [1700, 1695, 1703, 1698, 1705, 1710, 1707, 1712, 1709, 1715];
+        const monthlyGoldEUR = [1700, 1690, 1720, 1750, 1800, 1850, 1900, 1950, 2000, 2050, 2100, 2150];
 
-    // Günlük grafik oluşturma
-    var dailyCtx = document.getElementById('dailyChart').getContext('2d');
-    var dailyChart = new Chart(dailyCtx, {
-        type: 'line',
-        data: {
-            labels: dailyTarihler,
-            datasets: [{
-                label: 'Günlük Değişim Fiyatları',
-                data: dailyFiyatlar,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Altın Fiyatlarının Günlük Değişimi'
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                }
+        // Ethereum (ETH) Verileri
+        const dailyEthereum = [1500, 1550, 1570, 1560, 1580, 1600, 1595, 1610, 1620, 1650];
+        const monthlyEthereum = [1500, 1480, 1550, 1600, 1650, 1700, 1750, 1800, 1850, 1900, 2000, 2100];
+
+        // Günlük Altın (USD) Grafiği
+        new Chart(document.getElementById('dailyGoldChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05', '2024-01-06', '2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10'],
+                datasets: [{
+                    label: 'Günlük Değişim',
+                    data: dailyGoldUSD,
+                    borderColor: 'gold',
+                    backgroundColor: 'rgba(255, 215, 0, 0.5)',
+                    fill: true,
+                    tension: 0.4
+                }]
             },
-            scales: {
-                y: {
-                    beginAtZero: false
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Altın Fiyatları Günlük Değişimi (USD)' },
+                    tooltip: { mode: 'index', intersect: false }
                 }
             }
-        }
-    });
+        });
 
-    // Aylık grafik oluşturma
-    var monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
-    var monthlyChart = new Chart(monthlyCtx, {
-        type: 'line',
-        data: {
-            labels: monthlyTarihler,
-            datasets: [{
-                label: 'Aylık Değişim Fiyatları',
-                data: monthlyFiyatlar,
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Altın Fiyatlarının Aylık Değişimi'
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                }
+        // Günlük Bitcoin (BTC) Grafiği
+        new Chart(document.getElementById('dailyBitcoinChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05', '2024-01-06', '2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10'],
+                datasets: [{
+                    label: 'Günlük Değişim',
+                    data: dailyBitcoin,
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 0, 255, 0.5)',
+                    fill: true,
+                    tension: 0.4
+                }]
             },
-            scales: {
-                y: {
-                    beginAtZero: false
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Bitcoin Fiyatları Günlük Değişimi (BTC)' },
+                    tooltip: { mode: 'index', intersect: false }
                 }
             }
-        }
-    });
-</script>
+        });
+
+        // Günlük Euro (EUR) Grafiği
+        new Chart(document.getElementById('dailyEuroChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05', '2024-01-06', '2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10'],
+                datasets: [{
+                    label: 'Günlük Değişim',
+                    data: dailyGoldEUR,
+                    borderColor: 'green',
+                    backgroundColor: 'rgba(0, 255, 0, 0.5)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Euro Fiyatları Günlük Değişimi (EUR)' },
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+
+        // Günlük Ethereum (ETH) Grafiği
+        new Chart(document.getElementById('dailyEthereumChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05', '2024-01-06', '2024-01-07', '2024-01-08', '2024-01-09', '2024-01-10'],
+                datasets: [{
+                    label: 'Günlük Değişim',
+                    data: dailyEthereum,
+                    borderColor: 'purple',
+                    backgroundColor: 'rgba(128, 0, 128, 0.5)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Ethereum Fiyatları Günlük Değişimi (ETH)' },
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+
+        // Aylık Altın (USD) Grafiği
+        new Chart(document.getElementById('monthlyGoldChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12'],
+                datasets: [{
+                    label: 'Aylık Değişim',
+                    data: monthlyGoldUSD,
+                    borderColor: 'gold',
+                    backgroundColor: 'rgba(255, 215, 0, 0.5)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Altın Fiyatları Aylık Değişimi (USD)' },
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+
+        // Aylık Bitcoin (BTC) Grafiği
+        new Chart(document.getElementById('monthlyBitcoinChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12'],
+                datasets: [{
+                    label: 'Aylık Değişim',
+                    data: monthlyBitcoin,
+                    borderColor: 'blue',
+                    backgroundColor: 'rgba(0, 0, 255, 0.5)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Bitcoin Fiyatları Aylık Değişimi (BTC)' },
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+
+        // Aylık Euro (EUR) Grafiği
+        new Chart(document.getElementById('monthlyEuroChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12'],
+                datasets: [{
+                    label: 'Aylık Değişim',
+                    data: monthlyGoldEUR,
+                    borderColor: 'green',
+                    backgroundColor: 'rgba(0, 255, 0, 0.5)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Euro Fiyatları Aylık Değişimi (EUR)' },
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+
+        // Aylık Ethereum (ETH) Grafiği
+        new Chart(document.getElementById('monthlyEthereumChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12'],
+                datasets: [{
+                    label: 'Aylık Değişim',
+                    data: monthlyEthereum,
+                    borderColor: 'purple',
+                    backgroundColor: 'rgba(128, 0, 128, 0.5)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Ethereum Fiyatları Aylık Değişimi (ETH)' },
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

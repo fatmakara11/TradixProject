@@ -1,15 +1,16 @@
-using TradixProject.DataAccessLayer.Concrete;
+/*using TradixProject.DataAccessLayer.Concrete;
+using TradixProject.DataAccessLayer.Repositories;*/
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<Context>();
+/*builder.Services.AddDbContext<Context>();*/
 //builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<Context>();
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
-
+/*builder.Services.AddScoped<IKriptoParaRepository, KriptoParaRepository>();*/
 
 /*builder.Services.AddHttpClient();*/
 
@@ -32,5 +33,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=CustomerLayout}/{action=Index}/{id?}");
+/*pattern: "{controller=Hisse}/{action=Index}/{id?}");*/
 
 app.Run();

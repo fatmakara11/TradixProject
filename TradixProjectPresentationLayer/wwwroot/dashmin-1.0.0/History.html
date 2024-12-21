@@ -1,0 +1,436 @@
+
+    <title>Kripto ve Döviz Geçmişi</title>
+    <style>
+        body {
+            background-color: #1e1e1e; /* Koyu gri arka plan */
+            color: #fff; /* Varsayılan metin rengi beyaz */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #000000; /* Siyah arka plan */
+            color: #cc00cc; /* Fosforlu mor yazı rengi */
+        }
+
+        td {
+            background-color: #000; /* Siyah arka plan */
+            color: #ffff00; /* Daha fosforlu sarı yazı rengi */
+        }
+
+        tr:nth-child(even) {
+            background-color: #000; /* Çift satırlarda da siyah arka plan */
+        }
+
+        td:nth-child(6) {
+            color: #39ff14; /* Fosforlu yeşil yazı rengi - En Yüksek Değer sütunu */
+        }
+
+        td:nth-child(7) {
+            color: #ff073a; /* Fosforlu kırmızı yazı rengi - En Düşük Değer sütunu */
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #ff073a; /* Fosforlu kırmızı renk */
+        }
+        /* Dekoratör için highlight sınıfı */
+        .highlight {
+            border: 2px solid #fffc33; /* Fosforlu sarı çerçeve */
+            font-weight: bold;
+        }
+    </style>
+ 
+
+@{
+    Layout = null;
+ }
+    <!-- Kripto Geçmişi Tablosu -->
+    <h2>Kripto Geçmişi</h2>
+    <table>
+        <tr>
+            <th>Kripto Para</th>
+            <th>Kuruluş Yeri</th>
+            <th>Kurucu</th>
+            <th>Özellik</th>
+            <th>Son 1 Yıllık Değişim</th>
+            <th>En Yüksek Değer (2024'e Kadar)</th>
+            <th>En Düşük Değer (2024'e Kadar)</th>
+        </tr>
+        <tr><td>Bitcoin Tetherus</td><td>Hong Kong</td><td>Tether Limited</td><td>1 USD'ye sabit stablecoin</td><td>%1</td><td>1.01 USD</td><td>0.95 USD</td></tr>
+        <tr><td>Bitcoin Amerikan Doları</td><td>Japonya</td><td>Satoshi Nakamoto</td><td>İlk merkeziyetsiz kripto para</td><td>%0.05</td><td>69,000 USD</td><td>15,000 USD</td></tr>
+        <tr><td>Bitcoin Türk Lirası</td><td>Türkiye</td><td>Anonim</td><td>Türk Lirası bazında BTC fiyatı</td><td>%1.098</td><td>3,600,000 TRY</td><td>1,000,000 TRY</td></tr>
+        <tr><td>Ethereum Tetherus</td><td>İsviçre</td><td>Vitalik Buterin</td><td>USDT'ye sabit ETH</td><td>%94.621</td><td>3,500 USD</td><td>900 USD</td></tr>
+        <tr><td>Ethereum Amerikan Doları</td><td>İsviçre</td><td>Vitalik Buterin</td><td>Akıllı kontrat platformu</td><td>%92.91</td><td>4,900 USD</td><td>1,200 USD</td></tr>
+        <tr><td>Ethereum Türk Lirası</td><td>Türkiye</td><td>Vitalik Buterin</td><td>Türk Lirası bazında ETH</td><td>%94.545</td><td>140,000 TRY</td><td>50,000 TRY</td></tr>
+        <tr><td>Dogecoin Tetherus</td><td>ABD</td><td>Billy Markus</td><td>USDT bazında DOGE</td><td>%1.565</td><td>0.50 USD</td><td>0.10 USD</td></tr>
+        <tr><td>Dogecoin Türk Lirası</td><td>ABD</td><td>Billy Markus</td><td>Türk Lirası bazında DOGE</td><td>%1.489</td><td>7.50 TRY</td><td>1.00 TRY</td></tr>
+        <tr><td>Dogecoin Amerikan Doları</td><td>ABD</td><td>Billy Markus</td><td>Düşük maliyetli kripto</td><td>%0.65</td><td>0.70 USD</td><td>0.15 USD</td></tr>
+        <tr><td>ICON Tetherus</td><td>Güney Kore</td><td>ICON Foundation</td><td>Blockchain ağı</td><td>%94.588</td><td>13 USD</td><td>2 USD</td></tr>
+        <tr><td>IDEX Tetherus</td><td>ABD</td><td>Idex</td><td>Merkeziyetsiz borsa token</td><td>%2.247</td><td>0.90 USD</td><td>0.20 USD</td></tr>
+        <tr><td>Komodo Bitcoin</td><td>ABD</td><td>Komodo</td><td>Ölçeklenebilir platform</td><td>%8.172</td><td>0.80 USD</td><td>0.10 USD</td></tr>
+        <tr><td>Komodo Tetherus</td><td>ABD</td><td>Komodo</td><td>USDT bazında KMD</td><td>%90.525</td><td>1.00 USD</td><td>0.20 USD</td></tr>
+        <tr><td>USD Coin Tetherus</td><td>ABD</td><td>Circle</td><td>1 USD'ye sabit stablecoin</td><td>%0.04</td><td>1.01 USD</td><td>0.99 USD</td></tr>
+        <tr><td>TRX Tetherus</td><td>Çin</td><td>Justin Sun</td><td>TRON ağına sabitlenmiş token</td><td>%0.15</td><td>0.08 USD</td><td>0.03 USD</td></tr>
+        <tr><td>Solana</td><td>ABD</td><td>Anatoly Yakovenko</td><td>Yüksek hız ve düşük maliyetli blockchain</td><td>%150</td><td>260 USD</td><td>10 USD</td></tr>
+        <tr><td>Ripple</td><td>ABD</td><td>Chris Larsen, Jed McCaleb</td><td>Bankalar arası ödeme sistemi</td><td>%200</td><td>3.40 USD</td><td>0.15 USD</td></tr>
+        <tr><td>Terra</td><td>Güney Kore</td><td>Do Kwon</td><td>Algoritmik stablecoin platformu</td><td>%50</td><td>120 USD</td><td>0.50 USD</td></tr>
+        <tr><td>Polkadot</td><td>İsviçre</td><td>Gavin Wood</td><td>Blockchain ağları arasında köprü</td><td>%85</td><td>50 USD</td><td>3 USD</td></tr>
+        <tr><td>Avalanche</td><td>ABD</td><td>Emin Gün Sirer</td><td>Hızlı akıllı kontratlar</td><td>%95</td><td>150 USD</td><td>10 USD</td></tr>
+        <tr><td>Polygon</td><td>Hindistan</td><td>Jaynti Kanani</td><td>Ethereum ölçeklendirme çözümü</td><td>%90</td><td>2.92 USD</td><td>0.20 USD</td></tr>
+        <tr><td>SHIBA INU</td><td>Anonim</td><td>Ryoshi</td><td>Meme tabanlı kripto</td><td>%250</td><td>0.00009 USD</td><td>0.000001 USD</td></tr>
+        <tr><td>NEAR Protocol</td><td>ABD</td><td>Illia Polosukhin</td><td>Geliştirici dostu blockchain</td><td>%120</td><td>20 USD</td><td>1 USD</td></tr>
+        <tr><td>ChainLink</td><td>ABD</td><td>Sergey Nazarov</td><td>Blockchain oracle çözümü</td><td>%70</td><td>52 USD</td><td>6 USD</td></tr>
+        <tr><td>Uniswap</td><td>ABD</td><td>Hayden Adams</td><td>Merkeziyetsiz borsa platformu</td><td>%60</td><td>45 USD</td><td>3 USD</td></tr>
+        <tr><td>Litecoin</td><td>ABD</td><td>Charlie Lee</td><td>Bitcoin'in hafif sürümü</td><td>%30</td><td>400 USD</td><td>25 USD</td></tr>
+        <tr><td>Cosmos</td><td>ABD</td><td>Jae Kwon</td><td>Blockchain ağı için internet</td><td>%80</td><td>45 USD</td><td>5 USD</td></tr>
+        <tr><td>Algorand</td><td>ABD</td><td>Silvio Micali</td><td>Hızlı ve düşük maliyetli blockchain</td><td>%75</td><td>3 USD</td><td>0.10 USD</td></tr>
+        <tr><td>Fantom</td><td>Güney Kore</td><td>Michael Kong</td><td>Hızlı ve ölçeklenebilir blockchain</td><td>%120</td><td>3.46 USD</td><td>0.15 USD</td></tr>
+        <tr><td>TRON</td><td>Çin</td><td>Justin Sun</td><td>Blockchain tabanlı eğlence sistemi</td><td>%90</td><td>0.30 USD</td><td>0.01 USD</td></tr>
+        <tr><td>Stellar Lumens</td><td>ABD</td><td>Jed McCaleb</td><td>Bankalar için ödeme çözümü</td><td>%85</td><td>0.89 USD</td><td>0.02 USD</td></tr>
+        <tr><td>Hedera</td><td>ABD</td><td>Leemon Baird</td><td>Hızlı ve güvenli DLT platformu</td><td>%75</td><td>0.57 USD</td><td>0.10 USD</td></tr>
+        <tr><td>WETH</td><td>Global</td><td>Vitalik Buterin</td><td>Ethereum'un ERC20 uyumlu versiyonu</td><td>%50</td><td>4,500 USD</td><td>1,000 USD</td></tr>
+        <tr><td>Pepe</td><td>Anonim</td><td>Anonim</td><td>Meme tabanlı kripto</td><td>%300</td><td>0.0002 USD</td><td>0.00001 USD</td></tr>
+        <tr><td>XRP</td><td>ABD</td><td>Ripple Labs</td><td>Hızlı ve düşük maliyetli transfer</td><td>%200</td><td>3.40 USD</td><td>0.15 USD</td></tr>
+    </table>
+
+    <!-- Döviz Geçmişi Tablosu -->
+
+    <h2>Döviz Geçmişi</h2>
+    <table>
+        <tr>
+            <th>Döviz Türü</th>
+            <th>Kuruluş Yeri</th>
+            <th>Kurucu</th>
+            <th>Özellik</th>
+            <th>Son 1 Yıllık Değişim</th>
+            <th>En Yüksek Değer (2024'e Kadar)</th>
+            <th>En Düşük Değer (2024'e Kadar)</th>
+        </tr>
+        <tr>
+            <td>Amerikan Doları</td>
+            <td>ABD</td>
+            <td>ABD Federal Rezerv</td>
+            <td>Dünya rezerv para birimi</td>
+            <td>%0.04</td>
+            <td>35.00</td>
+            <td>33.50</td>
+        </tr>
+        <tr>
+            <td>Euro</td>
+            <td>Avrupa Birliği</td>
+            <td>Avrupa Merkez Bankası</td>
+            <td>AB'nin ortak para birimi</td>
+            <td>%0.23</td>
+            <td>37.00</td>
+            <td>34.00</td>
+        </tr>
+        <tr>
+            <td>İngiliz Sterlini</td>
+            <td>İngiltere</td>
+            <td>İngiltere Merkez Bankası</td>
+            <td>En eski para birimi</td>
+            <td>%-0.13</td>
+            <td>45.00</td>
+            <td>42.00</td>
+        </tr>
+        <tr>
+            <td>Avustralya Doları</td>
+            <td>Avustralya</td>
+            <td>Avustralya Merkez Bankası</td>
+            <td>Resmi Avustralya parası</td>
+            <td>%0.22</td>
+            <td>23.00</td>
+            <td>21.00</td>
+        </tr>
+        <tr>
+            <td>Kanada Doları</td>
+            <td>Kanada</td>
+            <td>Kanada Merkez Bankası</td>
+            <td>Resmi Kanada parası</td>
+            <td>%-0.13</td>
+            <td>25.00</td>
+            <td>22.00</td>
+        </tr>
+        <tr>
+            <td>İsviçre Frankı</td>
+            <td>İsviçre</td>
+            <td>İsviçre Merkez Bankası</td>
+            <td>Güçlü ve stabil para birimi</td>
+            <td>%-0.43</td>
+            <td>40.00</td>
+            <td>35.00</td>
+        </tr>
+        <tr>
+            <td>Çin Yuanı</td>
+            <td>Çin</td>
+            <td>Çin Merkez Bankası</td>
+            <td>Çin'in resmi para birimi</td>
+            <td>%0.13</td>
+            <td>5.00</td>
+            <td>4.00</td>
+        </tr>
+        <tr>
+            <td>Rus Rublesi</td>
+            <td>Rusya</td>
+            <td>Rusya Merkez Bankası</td>
+            <td>Rusya'nın resmi para birimi</td>
+            <td>%0.1</td>
+            <td>0.35</td>
+            <td>0.25</td>
+        </tr>
+        <tr>
+            <td>İsveç Kronu</td>
+            <td>İsveç</td>
+            <td>İsveç Merkez Bankası</td>
+            <td>İskandinav ülkesinin resmi parası</td>
+            <td>%-0.07</td>
+            <td>4.00</td>
+            <td>3.00</td>
+        </tr>
+        <tr>
+            <td>BAE Dirhemi</td>
+            <td>Birleşik Arap Emirlikleri</td>
+            <td>BAE Merkez Bankası</td>
+            <td>BAE'nin resmi para birimi</td>
+            <td>%0.04</td>
+            <td>10.00</td>
+            <td>9.00</td>
+        </tr>
+        <tr>
+            <td>Bulgar Levası</td>
+            <td>Bulgaristan</td>
+            <td>Bulgaristan Merkez Bankası</td>
+            <td>Bulgaristan'ın resmi para birimi</td>
+            <td>%0.2</td>
+            <td>20.00</td>
+            <td>18.00</td>
+        </tr>
+        <tr>
+            <td>Japon Yeni</td>
+            <td>Japonya</td>
+            <td>Japonya Merkez Bankası</td>
+            <td>Asya'nın güçlü para birimi</td>
+            <td>%0.52</td>
+            <td>0.50</td>
+            <td>0.40</td>
+        </tr>
+        <tr>
+            <td>Kuveyt Dinarı</td>
+            <td>Kuveyt</td>
+            <td>Kuveyt Merkez Bankası</td>
+            <td>Dünyanın en değerli para birimi</td>
+            <td>%0.02</td>
+            <td>120.00</td>
+            <td>110.00</td>
+        </tr>
+        <tr>
+            <td>Suudi Riyali</td>
+            <td>Suudi Arabistan</td>
+            <td>Suudi Arabistan Merkez Bankası</td>
+            <td>Suudi Arabistan'ın resmi para birimi</td>
+            <td>%-0.03</td>
+            <td>10.00</td>
+            <td>9.50</td>
+        </tr>
+        <tr>
+            <td>Güney Afrika Randı</td>
+            <td>Güney Afrika</td>
+            <td>Güney Afrika Merkez Bankası</td>
+            <td>Güney Afrika'nın resmi para birimi</td>
+            <td>%-0.28</td>
+            <td>2.50</td>
+            <td>2.00</td>
+        </tr>
+        </tr>
+        <td>GBP (İngiliz Sterlini)</td>
+        <td>İngiltere</td>
+        <td>İngiltere Merkez Bankası</td>
+        <td>En eski para birimi</td>
+        <td>%-0.5</td>
+        <td>1.45 USD</td>
+        <td>1.20 USD</td>
+        </tr>
+        </tr>
+        <tr>
+            <td>JPY (Japon Yeni)</td>
+            <td>Japonya</td>
+            <td>Japonya Merkez Bankası</td>
+            <td>Asya'nın güçlü para birimi</td>
+            <td>%0.2</td>
+            <td>0.01 USD</td>
+            <td>0.008 USD</td>
+        </tr>
+        <tr>
+            <td>CHF (İsviçre Frankı)</td>
+            <td>İsviçre</td>
+            <td>İsviçre Merkez Bankası</td>
+            <td>Güçlü ve stabil para birimi</td>
+            <td>%-0.3</td>
+            <td>1.10 USD</td>
+            <td>0.90 USD</td>
+        </tr>
+        <tr>
+            <td>AUD (Avustralya Doları)</td>
+            <td>Avustralya</td>
+            <td>Avustralya Merkez Bankası</td>
+            <td>Resmi Avustralya parası</td>
+            <td>%0.3</td>
+            <td>0.80 USD</td>
+            <td>0.70 USD</td>
+        </tr>
+        <tr>
+            <td>CAD (Kanada Doları)</td>
+            <td>Kanada</td>
+            <td>Kanada Merkez Bankası</td>
+            <td>Resmi Kanada parası</td>
+            <td>%0.2</td>
+            <td>0.78 USD</td>
+            <td>0.68 USD</td>
+        </tr>
+        <tr>
+            <td>CNY (Çin Yuanı)</td>
+            <td>Çin</td>
+            <td>Çin Merkez Bankası</td>
+            <td>Çin'in resmi para birimi</td>
+            <td>%0.1</td>
+            <td>0.15 USD</td>
+            <td>0.12 USD</td>
+        </tr>
+        <tr>
+            <td>RUP (Rus Rublesi)</td>
+            <td>Rusya</td>
+            <td>Rusya Merkez Bankası</td>
+            <td>Rusya'nın resmi para birimi</td>
+            <td>%0.05</td>
+            <td>0.014 USD</td>
+            <td>0.010 USD</td>
+        </tr>
+        <tr>
+            <td>INR (Hint Rupisi)</td>
+            <td>Hindistan</td>
+            <td>Hindistan Merkez Bankası</td>
+            <td>Hindistan'ın resmi para birimi</td>
+            <td>%0.15</td>
+            <td>0.014 USD</td>
+            <td>0.012 USD</td>
+        </tr>
+        <tr>
+            <td>BRL (Brezilya Reali)</td>
+            <td>Brezilya</td>
+            <td>Brezilya Merkez Bankası</td>
+            <td>Brezilya'nın resmi para birimi</td>
+            <td>%0.12</td>
+            <td>0.22 USD</td>
+            <td>0.18 USD</td>
+        </tr>
+        <tr>
+            <td>MXN (Meksika Pezosu)</td>
+            <td>Meksika</td>
+            <td>Meksika Merkez Bankası</td>
+            <td>Meksika'nın resmi para birimi</td>
+            <td>%0.10</td>
+            <td>0.07 USD</td>
+            <td>0.05 USD</td>
+        </tr>
+        <tr>
+            <td>ZAR (Güney Afrika Randı)</td>
+            <td>Güney Afrika</td>
+            <td>Güney Afrika Merkez Bankası</td>
+            <td>Güney Afrika'nın resmi para birimi</td>
+            <td>%-0.2</td>
+            <td>0.06 USD</td>
+            <td>0.04 USD</td>
+        </tr>
+        <tr>
+            <td>KRW (Güney Kore Wonu)</td>
+            <td>Güney Kore</td>
+            <td>Güney Kore Merkez Bankası</td>
+            <td>Güney Kore'nin resmi para birimi</td>
+            <td>%0.05</td>
+            <td>0.001 USD</td>
+            <td>0.0008 USD</td>
+        </tr>
+        <tr>
+            <td>SGD (Singapur Doları)</td>
+            <td>Singapur</td>
+            <td>Singapur Merkez Bankası</td>
+            <td>Singapur'un resmi para birimi</td>
+            <td>%0.2</td>
+            <td>0.74 USD</td>
+            <td>0.65 USD</td>
+        </tr>
+        <tr>
+            <td>HKD (Hong Kong Doları)</td>
+            <td>Hong Kong</td>
+            <td>Hong Kong Para Otoritesi</td>
+            <td>Hong Kong'un resmi para birimi</td>
+            <td>%0.1</td>
+            <td>0.13 USD</td>
+            <td>0.10 USD</td>
+        </tr>
+        <tr>
+            <td>SEK (İsveç Kronu)</td>
+            <td>İsveç</td>
+            <td>İsveç Merkez Bankası</td>
+            <td>İsveç'in resmi para birimi</td>
+            <td>%0.1</td>
+            <td>0.095 USD</td>
+            <td>0.080 USD</td>
+        </tr>
+        <tr>
+            <td>NOK (Norveç Kronu)</td>
+            <td>Norveç</td>
+            <td>Norveç Merkez Bankası</td>
+            <td>Norveç'in resmi para birimi</td>
+            <td>%0.1</td>
+            <td>0.095 USD</td>
+            <td>0.080 USD</td>
+        </tr>
+        <tr>
+            <td>DKK (Danimarka Kronu)</td>
+            <td>Danimarka</td>
+            <td>Danimarka Merkez Bankası</td>
+            <td>Danimarka'nın resmi para birimi</td>
+            <td>%0.1</td>
+            <td>0.14 USD</td>
+            <td>0.12 USD</td>
+        </tr>
+        <tr>
+            <td>PLN (Polonya Zlotisi)</td>
+            <td>Polonya</td>
+            <td>Polonya Merkez Bankası</td>
+            <td>Polonya'nın resmi para birimi</td>
+            <td>%0.2</td>
+            <td>0.28 USD</td>
+            <td>0.23 USD</td>
+        </tr>
+    </table>
+
+    <script>
+        // Dekoratör işlevi: Belirli hücrelere "highlight" sınıfı ekler
+        function decorateCells(selector) {
+            const cells = document.querySelectorAll(selector);
+            cells.forEach(cell => {
+                cell.classList.add("highlight");
+            });
+        }
+
+        // Kullanım: En yüksek değer ve en düşük değer hücrelerini vurgula
+        decorateCells("td:nth-child(6)"); // En Yüksek Değer sütunu
+        decorateCells("td:nth-child(7)"); // En Düşük Değer sütunu
+    </script>
+</body>
+</html>

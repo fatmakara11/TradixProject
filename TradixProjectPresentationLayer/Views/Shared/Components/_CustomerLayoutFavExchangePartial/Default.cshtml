@@ -1,112 +1,193 @@
-﻿@model List<TradixProjectPresentationLayer.Models.GunDoviz>
+﻿@model List<TradixProjectPresentationLayer.Models.HistoricalMarketData>
 
-@{
-    ViewData["Title"] = "Döviz Verileri";
-}
-
-<h2>@ViewData["Title"]</h2>
-
-@if (Model != null && Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Döviz Adı</th>
-                <th>Alış</th>
-                <th>Satış</th>
-                <th>% Fark</th>
-                <th>Tarih</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.DovizAdi</td>
-                    <td>@item.Alis</td>
-                    <td>@item.Satis</td>
-                    <td>@item.Fark</td>
-                    <td>@item.Tarih.ToString("dd/MM/yyyy")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Veri bulunamadı.</p>
-}
-
-
-<canvas id="dovizChart" width="400" height="200"></canvas>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-    var gunDovizData = @Html.Raw(ViewBag.GunDovizData);
-
-    var labels = [];
-    var alisData = [];
-    var satisData = [];
-    var farkData = [];
-
-    gunDovizData.forEach(function (item) {
-        labels.push(item.DovizAdi + " (" + item.Tarih.split("T")[0] + ")");
-        alisData.push(item.Alis);
-        satisData.push(item.Satis);
-        farkData.push(item.Fark);
-    });
-
-    var ctx = document.getElementById('dovizChart').getContext('2d');
-    var dovizChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Alış Fiyatı',
-                data: alisData,
-                borderColor: 'green',
-                fill: false
-            },
-            {
-                label: 'Satış Fiyatı',
-                data: satisData,
-                borderColor: 'red',
-                fill: false
-            },
-            {
-                label: 'Fark (%)',
-                data: farkData,
-                borderColor: 'blue',
-                fill: false
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                },
-            },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Döviz Adı ve Tarih'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Fiyat'
-                    }
-                }
-            }
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finansal Veriler</title>
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Space between cards */
+            justify-content: space-between;
         }
-    });
-</script>
+
+        /* Individual card styling */
+        .card {
+           /*  background-color: #1e1e1e; /* Dark background for the card */ */
+            color: white; /* White text inside the card */
+            border-radius: 8px; /* Rounded corners */
+            padding: 20px; /* Inner padding */
+            width: calc(50% - 20px); /* 2 cards per row with some space in between */
+            box-sizing: border-box;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the card */
+            transition: transform 0.3s ease; /* Smooth transform for hover effect */
+        }
+
+            /* Add hover effect for cards */
+            .card:hover {
+                transform: translateY(-5px); /* Lift card on hover */
+            }
+
+        /* Card title */
+        .card-title {
+            font-size: 2em; /* Increase the size of the title */
+            color: #009CFF; /* Blue text for the title */
+            margin-bottom: 15px; /* Add margin for spacing */
+        }
+
+        /* New rule to display card content in a row */
+        .card-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Space between items in a row */
+        }
+
+            /* Styling individual fields inside the card */
+            .card-content p {
+                flex: 1 1 45%; /* Each field takes up 45% of the card width, with flex wrapping */
+                margin: 10px 0; /* Increase space between rows */
+                font-size: 1.2em; /* Increase the font size */
+                color: black; /* Set text color to black */
+            }
+
+
+        /* Specific card colors to match the charts */
+        .card-bitcoin {
+            border-left: 8px solid #F2A900; /* Bitcoin color */
+            background-color: #FAE08A; /* Bitcoin daha açık renk */
+        }
+
+        .card-ethereum {
+            border-left: 8px solid #8A2BE2; /* Ethereum color */
+            background-color: #B68BFF; /* Ethereum daha açık renk */
+        }
+
+        .card-euro {
+            border-left: 8px solid #00FF00; /* Euro color */
+            background-color: #99FF99; /* Euro daha açık renk */
+        }
+
+        .card-dollar {
+            border-left: 8px solid #008CBA; /* Dollar color */
+            background-color: #99CCFF; /* Dollar daha açık renk */
+        }
+
+        .card-gold {
+            border-left: 8px solid #FFD700; /* Gold color */
+            background-color: #FFEE99; /* Gold daha açık renk */
+        }
+
+        .card-gramgold {
+            border-left: 8px solid #FF7F00; /* Gold color */
+            background-color: #FFCC99; /* Gold daha açık renk */
+        }
+
+      
+    </style>
+</head>
+<body>
+
+@* <h1>2024-12-01 Tarihli Finansal Veriler</h1> *@
+
+<div class="card-container">
+    @foreach (var item in Model)
+    {
+        @if (item.Symbol == "BTC")
+        {
+            <div class="card card-bitcoin">
+                <h3 class="card-title">Bitcoin</h3>
+                <div class="card-content">
+                    <p><strong>Tarih:</strong> @item.DateTime</p>
+                    <p><strong>Açılış Fiyatı:</strong> @item.OpenPrice</p>
+                    <p><strong>Kapanış Fiyatı:</strong> @item.ClosePrice</p>
+                    <p><strong>En Yüksek Fiyat:</strong> @item.HighPrice</p>
+                    <p><strong>En Düşük Fiyat:</strong> @item.LowPrice</p>
+                    <p><strong>Hacim:</strong> @item.Volume</p>
+                    <p><strong>Yüzde Değişim:</strong> @item.PercentageChange</p>
+                </div>
+            </div>
+        }
+        else if (item.Symbol == "ETH")
+        {
+            <div class="card card-ethereum">
+                <h3 class="card-title">Ethereum</h3>
+                <div class="card-content">
+                    <p><strong>Tarih:</strong> @item.DateTime</p>
+                    <p><strong>Açılış Fiyatı:</strong> @item.OpenPrice</p>
+                    <p><strong>Kapanış Fiyatı:</strong> @item.ClosePrice</p>
+                    <p><strong>En Yüksek Fiyat:</strong> @item.HighPrice</p>
+                    <p><strong>En Düşük Fiyat:</strong> @item.LowPrice</p>
+                    <p><strong>Hacim:</strong> @item.Volume</p>
+                    <p><strong>Yüzde Değişim:</strong> @item.PercentageChange</p>
+                </div>
+            </div>
+        }
+        else if (item.Symbol == "EUR")
+        {
+            <div class="card card-euro">
+                <h3 class="card-title">Euro</h3>
+                <div class="card-content">
+                    <p><strong>Tarih:</strong> @item.DateTime</p>
+                    <p><strong>Açılış Fiyatı:</strong> @item.OpenPrice</p>
+                    <p><strong>Kapanış Fiyatı:</strong> @item.ClosePrice</p>
+                    <p><strong>En Yüksek Fiyat:</strong> @item.HighPrice</p>
+                    <p><strong>En Düşük Fiyat:</strong> @item.LowPrice</p>
+                    <p><strong>Hacim:</strong> @item.Volume</p>
+                    <p><strong>Yüzde Değişim:</strong> @item.PercentageChange</p>
+                </div>
+            </div>
+        }
+        else if (item.Symbol == "USD")
+        {
+            <div class="card card-dollar">
+                <h3 class="card-title">Dolar</h3>
+                <div class="card-content">
+                    <p><strong>Tarih:</strong> @item.DateTime</p>
+                    <p><strong>Açılış Fiyatı:</strong> @item.OpenPrice</p>
+                    <p><strong>Kapanış Fiyatı:</strong> @item.ClosePrice</p>
+                    <p><strong>En Yüksek Fiyat:</strong> @item.HighPrice</p>
+                    <p><strong>En Düşük Fiyat:</strong> @item.LowPrice</p>
+                    <p><strong>Hacim:</strong> @item.Volume</p>
+                    <p><strong>Yüzde Değişim:</strong> @item.PercentageChange</p>
+                </div>
+            </div>
+        }
+        else if (item.Symbol == "XAU")
+        {
+            <div class="card card-gold">
+                <h3 class="card-title">Altın</h3>
+                <div class="card-content">
+                    <p><strong>Tarih:</strong> @item.DateTime</p>
+                    <p><strong>Açılış Fiyatı:</strong> @item.OpenPrice</p>
+                    <p><strong>Kapanış Fiyatı:</strong> @item.ClosePrice</p>
+                    <p><strong>En Yüksek Fiyat:</strong> @item.HighPrice</p>
+                    <p><strong>En Düşük Fiyat:</strong> @item.LowPrice</p>
+                    <p><strong>Hacim:</strong> @item.Volume</p>
+                    <p><strong>Yüzde Değişim:</strong> @item.PercentageChange</p>
+                </div>
+            </div>
+        }
+        else if (item.Symbol == "XAU_GR")
+        {
+            <div class="card card-gramgold">
+                <h3 class="card-title">Gram Altın</h3>
+                <div class="card-content">
+                    <p><strong>Tarih:</strong> @item.DateTime</p>
+                    <p><strong>Açılış Fiyatı:</strong> @item.OpenPrice</p>
+                    <p><strong>Kapanış Fiyatı:</strong> @item.ClosePrice</p>
+                    <p><strong>En Yüksek Fiyat:</strong> @item.HighPrice</p>
+                    <p><strong>En Düşük Fiyat:</strong> @item.LowPrice</p>
+                    <p><strong>Hacim:</strong> @item.Volume</p>
+                    <p><strong>Yüzde Değişim:</strong> @item.PercentageChange</p>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+</body>
+</html>

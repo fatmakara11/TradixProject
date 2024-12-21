@@ -1,0 +1,134 @@
+﻿<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        background: url('/images/background.jpg') no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .brand-title {
+        font-size: 80px; /* Daha küçük başlık */
+        font-weight: bold;
+        color: #0074d9; /* Mavi renk */
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Gölge efekti */
+    }
+
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px; /* Daha az padding */
+        border-radius: 15px; /* Daha küçük köşe yuvarlama */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        width: 400px; /* Daha dar genişlik */
+        max-width: 90%;
+    }
+
+        .login-container h2 {
+            font-size: 28px; /* Daha küçük başlık boyutu */
+            color: #0074d9;
+            margin-bottom: 20px;
+        }
+
+        .login-container form {
+            width: 100%;
+        }
+
+        .login-container label {
+            display: block;
+            font-size: 16px; /* Daha küçük yazı */
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 12px; /* Daha az padding */
+            margin-bottom: 20px;
+            font-size: 16px; /* Daha küçük yazı boyutu */
+            border: 1px solid #ccc;
+            border-radius: 8px; /* Daha küçük köşe yuvarlama */
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+            .login-container input:focus {
+                border-color: #0074d9;
+                outline: none;
+                box-shadow: 0 0 6px #0074d9;
+            }
+
+        .login-container button {
+            width: 100%;
+            padding: 14px; /* Daha az padding */
+            font-size: 18px; /* Daha küçük yazı boyutu */
+            font-weight: bold;
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .login-container button:hover {
+                background-color: #0056b3;
+            }
+
+        .login-container a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px; /* Daha küçük yazı */
+            color: #0074d9;
+            text-decoration: none;
+        }
+
+            .login-container a:hover {
+                text-decoration: underline;
+            }
+
+    .alert {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 14px; /* Daha az padding */
+        background-color: #ff4d4d;
+        color: #fff;
+        text-align: center;
+        border-radius: 8px;
+    }
+</style>
+
+@{
+    Layout = null;
+}
+
+<div class="brand-title">Tradix</div> <!-- Büyütülmüş "Tradix" -->
+<div class="login-container">
+    <h2>Giriş Yap</h2>
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    <form method="post" action="/Login/Login">
+        <div>
+            <label for="email">E-posta:</label>
+            <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required />
+        </div>
+        <div>
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" name="password" placeholder="Şifrenizi girin" required />
+        </div>
+        <button type="submit">Giriş Yap</button>
+        <a href="/Login/ForgotPassword">Şifremi Unuttum?</a>
+    </form>
+</div>

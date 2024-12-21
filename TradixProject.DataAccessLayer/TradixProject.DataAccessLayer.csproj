@@ -25,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TradixProject.DtoLayer\TradixProject.DtoLayer.csproj" />
-    <ProjectReference Include="..\TradixProject.EntityLayer\TradixProject.EntityLayer.csproj" />
+    <ProjectReference Include="..\TradixProject.BusinessLayer\TradixProject.BusinessLayer.csproj" />
+
   </ItemGroup>
 
 </Project>
