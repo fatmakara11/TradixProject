@@ -1,32 +1,37 @@
-﻿/*// KriptoParaRepository.cs
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+
 using TradixProject.DataAccessLayer.Repositories;
-using TradixProjectPresentationLayer.Models;
 
-public class KriptoParaRepository : IKriptoParaRepository
+public class BitcoinRepository : IBitcoinRepository
 {
-    private readonly string _connectionString = "Server=FATMA\\SQLEXPRESS;Database=ExchangeRates;Trusted_Connection=True;TrustServerCertificate=True;";
+    private readonly string _connectionString;
 
-    public List<KriptoPara> GetAllKriptoParalar()
+    public BitcoinRepository(IConfiguration configuration)
     {
-        List<KriptoPara> kriptoParalar = new List<KriptoPara>();
+        // Retrieve the connection string from appsettings.json
+        _connectionString = configuration.GetConnectionString("DefaultConnection");
+    }
+
+    public List<BitcoinPara> GetActiveBitcoinData()
+    {
+        List<BitcoinPara> bitcoinParalar = new List<BitcoinPara>();
 
         using (var connection = new SqlConnection(_connectionString))
         {
-            string query = "SELECT * FROM kripto_paralar WHERE Durum = 1";
-            SqlCommand command = new SqlCommand(query, connection);
+            string query = "SELECT * FROM bitcoin_verileri WHERE Durum = 1";
 
+            SqlCommand command = new SqlCommand(query, connection);
             connection.Open();
 
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    kriptoParalar.Add(new KriptoPara
+                    bitcoinParalar.Add(new BitcoinPara
                     {
                         Id = reader.GetInt32(0),
-                        KriptoAdi = reader.GetString(1),
+                        BitcoinAdi = reader.GetString(1),
                         AlisFiyati = reader.GetDecimal(2),
                         SatisFiyati = reader.GetDecimal(3),
                         PiyasaDegeri = reader.IsDBNull(4) ? (decimal?)null : reader.GetDecimal(4),
@@ -38,7 +43,6 @@ public class KriptoParaRepository : IKriptoParaRepository
             }
         }
 
-        return kriptoParalar;
+        return bitcoinParalar;
     }
 }
-*/

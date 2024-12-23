@@ -2,7 +2,7 @@
 
 namespace TradixProjectPresentationLayer.Controllers
 {
-    public class HistoryController: Controller
+    public class HisseGecmisiController: Controller
     {
         // Giriş Sayfası (GET)
         [HttpGet]

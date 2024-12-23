@@ -9,6 +9,11 @@ namespace TradixProjectPresentationLayer.Controllers
     {
         public IActionResult Index()
         {
+            // ****************** DESIGN PATTERN: TEMPLATE METHOD ******************
+            // BU METOT, BELİRLİ BİR İŞ AKIŞINI (HISTORICAL DATA'NIN OLUŞTURULMASI VE GÖRÜNÜME GÖNDERİLMESİ) TEKRARLANABİLİR ŞEKİLDE TANIMLAR. 
+            // ŞABLON METOD, ANA İŞLEYİŞİ BELİRLEYEN VE İŞİN ALT DETAYLARINI ALT SINIFLARA BIRAKAN BİR DESENDİR.
+            // BU ÖRNEKTE, VERİ OLUŞTURMA (SABİT VERİ) KODU KONTROL ALTINDADIR VE GÖRÜNÜME GÖNDERİLMESİ ANA METODUN KONTROLÜNDEDİR.
+
             // Verilerinizi burada oluşturun (bu örnekte sabit veri kullanıyoruz)
             var historicalMarketDataList = new List<HistoricalMarketData>
         {
@@ -79,6 +84,10 @@ namespace TradixProjectPresentationLayer.Controllers
                 PercentageChange = 2.56m
             }
         };
+
+            // ****************** DESIGN PATTERN: MVC (MODEL-VIEW-CONTROLLER) ******************
+            // BU DESEN, VERİ İŞLEME (MODEL), KONTROL (CONTROLLER) VE KULLANICI ARAYÜZÜNÜ (VIEW) AYIRARAK PROJENİN MODÜLER VE TEST EDİLEBİLİR OLMASINI SAĞLAR.
+            // BURADA CONTROLLER, VERİYİ OLUŞTURUP VIEW'A AKTARARAK MVC DESENİNİN "CONTROLLER" ROLÜNÜ OYNAR.
 
             // Veriyi view'a gönder
             return View(historicalMarketDataList);

@@ -1,4 +1,4 @@
-namespace TradixProjectPresentationLayer.Models
+﻿namespace TradixProjectPresentationLayer.Models
 {
     public class ErrorViewModel
     {

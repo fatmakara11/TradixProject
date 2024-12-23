@@ -422,13 +422,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TradixProject.BusinessLayer\TradixProject.BusinessLayer.csproj" />
-   
+    <ProjectReference Include="..\TradixProject.DataAccessLayer\TradixProject.DataAccessLayer.csproj" />
     <ProjectReference Include="..\TradixProject.DtoLayer\TradixProject.DtoLayer.csproj" />
     <ProjectReference Include="..\TradixProject.EntityLayer\TradixProject.EntityLayer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\HisseGecmisi\" />
   </ItemGroup>
 
 </Project>

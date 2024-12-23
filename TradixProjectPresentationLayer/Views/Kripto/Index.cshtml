@@ -3,6 +3,14 @@
 @{
     Layout = "_Layout";
 }
+   
+
+
+<!-- LAYOUT DESIGN PATTERN:
+     Bu şablon, sayfa düzenini (layout) düzenler.
+     Tekrarlanan bileşenler (başlık, stil dosyaları) layout içerisinde tanımlanır ve
+     sayfalara aktarılır. -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,68 +29,214 @@
             display: flex;
             flex-direction: column;
         }
-
-        h1 {
+        h2 {
             text-align: center;
             margin-top: 30px;
-            color: #009CFF;
+            color: #333;
         }
 
-        /* Sayfa İçeriği */
         .main-content {
-            display: flex;
-            margin-top: 20px;
-            margin-left: 250px; /* Sidebar genişliği kadar boşluk bırak */
-            margin-right: 20px; /* Sağ tarafta biraz boşluk bırak */
+            margin: 20px auto;
             padding: 20px;
+            display: flex;
             flex-direction: column;
             align-items: center;
+            margin-left: 250px; /* Sidebar genişliği kadar boşluk bırak */
+            padding: 20px;
         }
 
         .container {
             width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
         }
 
-        /* Kartların Konteyneri */
         .row {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px; /* Kartlar arasında boşluk */
-            justify-content: flex-start; /* Kartları sola hizala */
+            gap: 15px;
+            justify-content: flex-start;
         }
 
-        /* Kart Stili */
+        /* Kart Tasarımı */
         .card {
-            background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: calc(33.33% - 15px); /* 3 sütun yapısı */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: calc(33.33% - 15px);
             box-sizing: border-box;
-            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            color: #333;
         }
 
-        .card-header {
-            text-align: center;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #009CFF;
-        }
-
-        .card-content {
-            text-align: center;
-        }
-
-            .card-content span {
-                font-size: 1.1em;
-                margin: 5px 0;
+            /* Renk Teması */
+            .card:nth-child(1) {
+                background-color: #F2A900;
             }
 
+            .card:nth-child(2) {
+                background-color: #FAE08A;
+            }
+
+            .card:nth-child(3) {
+                background-color: #8A2BE2;
+            }
+
+            .card:nth-child(4) {
+                background-color: #B68BFF;
+            }
+
+            .card:nth-child(5) {
+                background-color: #00FF00;
+            }
+
+            .card:nth-child(6) {
+                background-color: #99FF99;
+            }
+
+            .card:nth-child(7) {
+                background-color: #008CBA;
+            }
+
+            .card:nth-child(8) {
+                background-color: #99CCFF;
+            }
+
+            .card:nth-child(9) {
+                background-color: #FFD700;
+            }
+
+            .card:nth-child(10) {
+                background-color: #FFEE99;
+            }
+
+            .card:nth-child(11) {
+                background-color: #FF7F00;
+            }
+
+            .card:nth-child(12) {
+                background-color: #FFCC99;
+            }
+
+            .card:nth-child(13) {
+                background-color: #F2A900;
+            }
+
+            .card:nth-child(14) {
+                background-color: #FAE08A;
+            }
+
+            .card:nth-child(15) {
+                background-color: #8A2BE2;
+            }
+
+            .card:nth-child(16) {
+                background-color: #B68BFF;
+            }
+
+            .card:nth-child(17) {
+                background-color: #00FF00;
+            }
+
+            .card:nth-child(18) {
+                background-color: #99FF99;
+            }
+
+            .card:nth-child(19) {
+                background-color: #008CBA;
+            }
+
+            .card:nth-child(20) {
+                background-color: #99CCFF;
+            }
+
+            .card:nth-child(21) {
+                background-color: #FFD700;
+            }
+
+            .card:nth-child(22) {
+                background-color: #FFEE99;
+            }
+
+            .card:nth-child(23) {
+                background-color: #FF7F00;
+            }
+
+            .card:nth-child(24) {
+                background-color: #FFCC99;
+            }
+
+            .card:nth-child(25) {
+                background-color: #8A2BE2;
+            }
+
+            .card:nth-child(26) {
+                background-color: #B68BFF;
+            }
+
+            .card:nth-child(27) {
+                background-color: #00FF00;
+            }
+
+            .card:nth-child(28) {
+                background-color: #99FF99;
+            }
+
+            .card:nth-child(29) {
+                background-color: #008CBA;
+            }
+
+            .card:nth-child(30) {
+                background-color: #99CCFF;
+            }
+
+            .card:nth-child(31) {
+                background-color: #FFD700;
+            }
+
+            .card:nth-child(32) {
+                background-color: #FFEE99;
+            }
+
+            .card:nth-child(33) {
+                background-color: #FF7F00;
+            }
+
+            .card:nth-child(34) {
+                background-color: #FFCC99;
+            }
+
+            .card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            }
+
+        /* Kart Başlık */
+        .card-header {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Kart İçerik */
+        .card-content span {
+            display: block;
+            margin: 10px 0;
+            font-size: 1.1em;
+            color: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+            /* Çizgiler Arası Ayırıcı */
+            .card-content span:not(:last-child) {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            }
     </style>
 </head>
 <body>
