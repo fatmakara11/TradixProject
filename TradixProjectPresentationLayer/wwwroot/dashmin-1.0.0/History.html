@@ -5,61 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kripto ve Döviz Geçmişi</title>
     <style>
-        body {
-            background-color: #1e1e1e; /* Koyu gri arka plan */
-            color: #fff; /* Varsayılan metin rengi beyaz */
-        }
+             /* Kapsülleme (Encapsulation): Stil (CSS) ve yapı (HTML) birbirinden ayrılmıştır. CSS, görsel düzenlemeleri kontrol eder. */
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 1em;
-            text-align: center;
-        }
+             /* Genel sayfa arka planı ve metin rengi */
+             body {
+                 background-color: white; /* Beyaz arka plan */
+                 color: black; /* Varsayılan metin rengi siyah */
+             }
 
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-        }
+             /* Tablo genel stili */
+             /* Şablon Tasarım Deseni (Template Design Pattern):
+        Tabloların yapısı sabit tutulmuş, yalnızca içerikler değişmektedir. */
+             table {
+                 width: 100%; /* Tablonun genişliği tam ekran */
+                 border-collapse: collapse; /* Çizgi aralarını birleştir */
+                 margin: 20px 0; /* Yukarı ve aşağı boşluk */
+                 font-size: 1em; /* Yazı boyutu */
+                 text-align: center; /* Metni ortala */
+                 background-color: white; /* Tablo arka planı beyaz */
+             }
 
-        th {
-            background-color: #000000; /* Siyah arka plan */
-            color: #cc00cc; /* Fosforlu mor yazı rengi */
-        }
+             /* Tablolardaki hücrelerin kenar ve dolgu stili */
+             th, td {
+                 padding: 12px; /* Hücre içi boşluk */
+                 border: 1px solid black; /* Genel tablo çizgileri siyah */
+             }
 
-        td {
-            background-color: #000; /* Siyah arka plan */
-            color: #ffff00; /* Daha fosforlu sarı yazı rengi */
-        }
+             /* Başlık stili */
+             th {
+                 color: black; /* Başlık yazı rengi siyah */
+             }
 
-        tr:nth-child(even) {
-            background-color: #000; /* Çift satırlarda da siyah arka plan */
-        }
+                 /* İlk 5 sütun başlığı (Açık Mavi) */
+                 th:nth-child(-n+5) {
+                     background-color: lightblue; /* Açık mavi dolgu rengi */
+                 }
 
-        td:nth-child(6) {
-            color: #39ff14; /* Fosforlu yeşil yazı rengi - En Yüksek Değer sütunu */
-        }
+                 /* "En Yüksek Değer" başlığı (Yeşil) */
+                 th:nth-child(6) {
+                     background-color: lightgreen; /* Yeşil dolgu rengi */
+                 }
 
-        td:nth-child(7) {
-            color: #ff073a; /* Fosforlu kırmızı yazı rengi - En Düşük Değer sütunu */
-        }
+                 /* "En Düşük Değer" başlığı (Kırmızı) */
+                 th:nth-child(7) {
+                     background-color: lightcoral; /* Kırmızı dolgu rengi */
+                 }
 
-        h2 {
-            text-align: center;
-            margin-top: 20px;
-            color: #ff073a; /* Fosforlu kırmızı renk */
-        }
-        /* Dekoratör için highlight sınıfı */
-        .highlight {
-            border: 2px solid #fffc33; /* Fosforlu sarı çerçeve */
-            font-weight: bold;
-        }
+             /* Varsayılan hücre stili */
+             td {
+                 background-color: white; /* Hücrelerin arka planı beyaz */
+             }
+
+                 /* Dekoratör Tasarım Deseni (Decorator Design Pattern): Belirli sütunlara özel stil uygulanmıştır. */
+
+                 /* En yüksek değerler için özel stil */
+                 td:nth-child(6) {
+                     color: #00B000; /*  yeşil */
+                     border-left: 2px solid #FF8C00; /* Sol kenar koyu turuncu */
+                     border-right: 2px solid #FF8C00; /* Sağ kenar koyu turuncu */
+                 }
+
+                 /* En düşük değerler için özel stil */
+                 td:nth-child(7) {
+                     color: #FF4500; /* kırmızı */
+                     border-left: 2px solid #FF8C00; /* Sol kenar koyu turuncu */
+                     border-right: 2px solid #FF8C00; /* Sağ kenar koyu turuncu */
+                 }
+
+                 /* Diğer hücreler için varsayılan mavi metin rengi */
+                 td:not(:nth-child(6)):not(:nth-child(7)) {
+                     color: blue; /* Fosforlu olmayan mavi */
+                 }
+
+             /* Tabloların başlıkları */
+             h2 {
+                 text-align: center; /* Başlık ortalanır */
+                 margin-top: 20px; /* Üst boşluk */
+                 color: purple; /* Başlık rengi mor */
+             }
     </style>
 </head>
 <body>
-
-
+    <!-- Şablon Tasarım Deseni (Template Design Pattern): Tabloların yapısı sabit tutulmuş, yalnızca içerikleri değişmiştir. -->
     <!-- Kripto Geçmişi Tablosu -->
     <h2>Kripto Geçmişi</h2>
     <table>
@@ -422,18 +449,6 @@
         </tr>
     </table>
 
-    <script>
-        // Dekoratör işlevi: Belirli hücrelere "highlight" sınıfı ekler
-        function decorateCells(selector) {
-            const cells = document.querySelectorAll(selector);
-            cells.forEach(cell => {
-                cell.classList.add("highlight");
-            });
-        }
 
-        // Kullanım: En yüksek değer ve en düşük değer hücrelerini vurgula
-        decorateCells("td:nth-child(6)"); // En Yüksek Değer sütunu
-        decorateCells("td:nth-child(7)"); // En Düşük Değer sütunu
-    </script>
 </body>
 </html>

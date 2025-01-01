@@ -5,9 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
 builder.Services.AddDbContext<Context>();
 
-// Register BitcoinRepository and ensure it uses IConfiguration
 builder.Services.AddScoped<IBitcoinRepository, BitcoinRepository>();
 
 builder.Services.AddHttpClient();

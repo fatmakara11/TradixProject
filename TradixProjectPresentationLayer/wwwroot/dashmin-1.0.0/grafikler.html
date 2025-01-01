@@ -1,447 +1,157 @@
-﻿,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,<!--AMERİKAN DOLARI-->
-
-
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRAFİKLER</title>
-    <!--Bootstrap CSS-->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!--Custom CSS-->
-    <style>
+    <title>Döviz Grafik Uygulaması</title>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
-            color: #ffc107;
-        }
-
-        .navbar {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-container {
-            margin-top: 20px;
-        }
-
-        .table thead {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
+            color: #212529;
         }
 
         .chart-container {
             margin-top: 30px;
-            margin-bottom: 20px;
-            background-color: black;
+            margin-bottom: 30px;
+            background-color: white;
             border-radius: 8px;
-            padding: 10px;
+            padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 50%; /* Grafiği küçültme */
-            max-width: 400px;
-            height: 250px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
 
         h4.chart-title {
-            font-size: 16px;
-            margin-bottom: 10px;
-            text-align: center;
-            font-weight: bold;
-            color: #FFFF00;
-            text-shadow: 0 0 10px #FFFF00, 0 0 20px #FFD700;
-        }
-
-        canvas {
-            width: 100% !important;
-            height: 200px !important;
-        }
-    </style>
-    <!--Chart.js-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-
-    <!--Döviz Grafiği-->
-    <h1>DÖVİZ GRAFİKLERİ</h1>
-    <div class="container chart-container">
-        <h4 class="chart-title">Günlük Amerikan Doları Alış-Satış Grafiği</h4>
-        <canvas id="dovizChart1"></canvas>
-    </div>
-    <!--JavaScript for Chart.js-->
-    <script>
-        const ctx1 = document.getElementById('dovizChart1').getContext('2d');
-        const dovizChart1 = new Chart(ctx1, {
-            type: 'line',
-            data: {
-
-                labels: ["18.12.2024", "19.12.2024", "20.12.2024", "21.12.2024", "22.12.2024", "23.12.2024", "24.12.2024", "25.12.2024", "26.12.2024", "27.12.2024", "28.12.2024", "29.12.2024", "30.12.2024", "31.12.2024", "01.01.2025"],
-                datasets: [
-                    {
-                        label: 'Alış Fiyatı',
-                        data: [34.3221, 34.4229, 34.4229, 34.5318, 34.5314, 34.4805, 34.5443, 34.5489, 34.7472, 34.8753, 35.0004, 35.0713, 35.1413, 35.1895, 35.1895],
-                        borderColor: '#FFEB3B',
-                        backgroundColor: 'rgba(0, 123, 255, 0.1)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Satış Fiyatı',
-                        data: [34.3313, 34.4465, 34.4465, 34.5371, 34.5563, 34.4879, 34.5651, 34.5828, 34.7534, 34.8866, 35.0193, 35.0784, 35.1657, 35.2068, 35.2068],
-                        borderColor: 'rgba(255, 99, 132, 0.8)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false
-                },
-                plugins: {
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            label: function (context) {
-                                const label = context.dataset.label || '';
-                                const value = context.parsed.y;
-                                return '${label}: ${value}';
-
-                            }
-                        }
-                    },
-                    legend: {
-                        position: 'top',
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Zaman'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Fiyat'
-                        }
-                    }
-                }
-            }
-        });</script>
-    <!--Bootstrap JS-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-
-
-
-
-
-<!--AVUSTURALYA DOLARI-->
-
-
-
-
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRAFİKLER</title>
-    <!--Bootstrap CSS-->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!--Custom CSS-->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #ffc107;
-        }
-
-        .navbar {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-container {
-            margin-top: 20px;
-        }
-
-        .table thead {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .chart-container {
-            margin-top: 30px;
+            font-size: 18px;
             margin-bottom: 20px;
-            background-color: black;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 50%; /* Grafiği küçültme */
-            max-width: 400px;
-            height: 250px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        h4.chart-title {
-            font-size: 16px;
-            margin-bottom: 10px;
             text-align: center;
             font-weight: bold;
-            color: #FFFF00;
-            text-shadow: 0 0 10px #FFFF00, 0 0 20px #FFD700;
+            color: #495057;
         }
 
         canvas {
             width: 100% !important;
-            height: 200px !important;
+            height: 300px !important;
         }
     </style>
-    <!--Chart.js-->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-    <!--Döviz Grafiği-->
-    <div class="container chart-container">
-        <h4 class="chart-title">Günlük Avustralya Doları Alış-Satış Grafiği</h4>
-        <canvas id="dovizChart2"></canvas>
+    <div class="container">
+        <h1 class="text-center mt-4">Döviz Grafikleri</h1>
+        <style>
+            h1 {
+                font-size: 36px;
+                font-weight: bold;
+                color: rgba(0, 0, 0, 0.8);
+                margin-bottom: 20px;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+
+
+
+        <!-- Amerikan Doları Grafiği -->
+        <div class="chart-container">
+            <h4 class="chart-title">Günlük Amerikan Doları Alış-Satış Grafiği</h4>
+            <canvas id="usdChart"></canvas>
+        </div>
+
+        <!-- Avustralya Doları Grafiği -->
+        <div class="chart-container">
+            <h4 class="chart-title">Günlük Avustralya Doları Alış-Satış Grafiği</h4>
+            <canvas id="audChart"></canvas>
+        </div>
+
+        <!-- BAE Dirhemi Grafiği -->
+        <div class="chart-container">
+            <h4 class="chart-title">BAE Dirhemi Alış-Satış Grafiği</h4>
+            <canvas id="aedChart"></canvas>
+        </div>
     </div>
-    <!--JavaScript for Chart.js-->
+
+    <!-- JavaScript for Charts -->
     <script>
-        const ctx2 = document.getElementById('dovizChart2').getContext('2d');
-        const dovizChart2 = new Chart(ctx2, {
-            type: 'line',
-            data: {
-
-                labels: ["18.12.2024", "19.12.2024", "20.12.2024", "21.12.2024", "22.12.2024", "23.12.2024", "24.12.2024", "25.12.2024", "26.12.2024", "27.12.2024", "28.12.2024", "29.12.2024", "30.12.2024", "31.12.2024", "01.01.2025"],
-                datasets: [
-                    {
-                        label: 'Alış Fiyatı',
-                        data: [22.1964, 22.22, 22.22, 22.2798, 22.5289, 22.4606, 22.4082, 22.432, 22.3424, 22.3598, 22.2551, 22.0925, 21, 8848, 21.9108, 21.9982, 21.9982],
-                        borderColor: '#FFEB3B',
-                        backgroundColor: 'rgba(255, 235, 59, 0.2)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Satış Fiyatı',
-                        data: [22.2198, 22.2455, 22.2908, 22.5445, 22.4792, 22.4249, 22.4533, 22.569, 22.598, 22.2699, 22.1181, 21.8986, 21.9436, 22.0232, 22.0232],
-                        borderColor: 'rgba(255, 99, 132, 0.8)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false
+        // STRATEJİ DESENİ: Her bir grafik oluşturma işlemini bir fonksiyon haline getirerek, farklı verilerle aynı yöntemi tekrar tekrar kullanıyoruz.
+        function createChart(canvasId, title, labels, buyData, sellData) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels, // Etiketler (tarih bilgisi)
+                    datasets: [
+                        {
+                            label: 'Alış Fiyatı',
+                            data: buyData, // Alış verileri
+                            borderColor: '#FFEB3B',
+                            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Satış Fiyatı',
+                            data: sellData, // Satış verileri
+                            borderColor: 'rgba(255, 99, 132, 0.8)',
+                            backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                            borderWidth: 2
+                        }
+                    ]
                 },
-                plugins: {
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            label: function (context) {
-                                const label = context.dataset.label || '';
-                                const value = context.parsed.y;
-                                return '${label}: ${value}';
-
-
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Zaman'
                             }
-                        }
-                    },
-                    legend: {
-                        position: 'top',
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Zaman'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Fiyat'
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Fiyat'
+                            }
                         }
                     }
                 }
-            }
-        });</script>
-    <!--Bootstrap JS-->
+            });
+        }
+
+        // VERİLERİN TEK BİR YERDE YÖNETİLMESİ: Bu, VERİ YÖNETİMİ ve TEK SORUMLULUK İLKESİ ile uyumludur.
+        const labels = ["18.12.2024", "19.12.2024", "20.12.2024", "21.12.2024", "22.12.2024", "23.12.2024", "24.12.2024", "25.12.2024", "26.12.2024", "27.12.2024", "28.12.2024", "29.12.2024", "30.12.2024", "31.12.2024", "01.01.2025"];
+
+        // Amerikan Doları Verileri
+        createChart('usdChart', 'Amerikan Doları', labels, [34.3221, 34.4229, 34.4229, 34.5318, 34.5314, 34.4805, 34.5443, 34.5489, 34.7472, 34.8753, 35.0004, 35.0713, 35.1413, 35.1895, 35.1895], [34.3313, 34.4465, 34.4465, 34.5371, 34.5563, 34.4879, 34.5651, 34.5828, 34.7534, 34.8866, 35.0193, 35.0784, 35.1657, 35.2068, 35.2068]);
+
+        // Avustralya Doları Verileri
+        createChart('audChart', 'Avustralya Doları', labels, [22.1964, 22.22, 22.22, 22.2798, 22.5289, 22.4606, 22.4082, 22.432, 22.3424, 22.3598, 22.2551, 22.0925, 21.8848, 21.9108, 21.9982, 21.9982], [22.2198, 22.2455, 22.2908, 22.5445, 22.4792, 22.4249, 22.4533, 22.569, 22.598, 22.2699, 22.1181, 21.8986, 21.9436, 22.0232, 22.0232]);
+
+        // BAE Dirhemi Verileri
+        createChart('aedChart', 'BAE Dirhemi', labels, [9.3435, 9.3727, 9.3727, 9.401, 9.3998, 9.3885, 9.4026, 9.4058, 9.4596, 9.4944, 9.5229, 9.5448, 9.5652, 9.5792, 9.5792], [9.3466, 9.379, 3.379, 9.404, 9.4093, 9.3923, 9.4117, 9.416, 9.4626, 9.4989, 9.5356, 9.5528, 9.5765, 9.585, 9.585]);
+    </script>
+
+    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
-
-<!--BAE DİRHEMİ-->
-
-
-
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRAFİKLER</title>
-    <!--Bootstrap CSS-->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!--Custom CSS-->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #ffc107;
-        }
-
-        .navbar {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .table-container {
-            margin-top: 20px;
-        }
-
-        .table thead {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .chart-container {
-            margin-top: 30px;
-            margin-bottom: 20px;
-            background-color: black;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 50%; /* Grafiği küçültme */
-            max-width: 400px;
-            height: 250px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        h4.chart-title {
-            font-size: 16px;
-            margin-bottom: 10px;
-            text-align: center;
-            font-weight: bold;
-            color: #D500F9;
-            text-shadow: 0 0 10px #D500F9, 0 0 20px #9C1DDF;
-        }
-
-        canvas {
-            width: 100% !important;
-            height: 200px !important;
-        }
-    </style>
-    <!--Chart.js-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-
-    <!--Döviz Grafiği-->
-    <div class="container chart-container">
-        <h4 class="chart-title">BAE Dirhemi Alış-Satış Grafiği</h4>
-        <canvas id="dovizChart3"></canvas>
-    </div>
-    <!--JavaScript for Chart.js-->
-    <script>
-        const ctx3 = document.getElementById('dovizChart3').getContext('2d');
-        const dovizChart3 = new Chart(ctx3, {
-            type: 'line',
-            data: {
-
-                labels: ["18.12.2024", "19.12.2024", "20.12.2024", "21.12.2024", "22.12.2024", "23.12.2024", "24.12.2024", "25.12.2024", "26.12.2024", "27.12.2024", "28.12.2024", "29.12.2024", "30.12.2024", "31.12.2024", "01.01.2025"],
-                datasets: [
-                    {
-                        label: 'Alış Fiyatı',
-                        data: [9.3435, 9.3727, 9.3727, 9.401, 9.3998, 9.3885, 9.4026, 9.4058, 9.4596, 9.4944, 9.5229, 9.5448, 9.5652, 9.5792, 9.5792],
-                        borderColor: '#FFEB3B',
-                        backgroundColor: 'rgba(255, 235, 59, 0.2)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'Satış Fiyatı',
-                        data: [9.3466, 9.379, 3.379, 9.404, 9.4093, 9.3923, 9.4117, 9.416, 9.4626, 9.4989, 9.5356, 9.5528, 9.5765, 9.585, 9.585],
-                        borderColor: 'rgba(255, 99, 132, 0.8)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false
-                },
-                plugins: {
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            label: function (context) {
-                                const label = context.dataset.label || '';
-                                const value = context.parsed.y;
-                                return '${label}: ${value}';
-
-
-                            }
-                        }
-                    },
-                    legend: {
-                        position: 'top',
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Zaman'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Fiyat'
-                        }
-                    }
-                }
-            }
-        });</script>
-    <!--Bootstrap JS-->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
 
 
 
@@ -464,7 +174,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -488,7 +198,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -612,7 +322,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -636,7 +346,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -743,6 +453,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
 <!--EURO-->
 
 
@@ -758,7 +470,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -782,7 +494,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -890,9 +602,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
 <!--GÜNEY AFRİKA RANDI-->
 
 <!DOCTYPE html>
@@ -907,7 +616,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -931,7 +640,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1056,7 +765,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -1080,7 +789,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1205,7 +914,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -1229,7 +938,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1353,7 +1062,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -1377,7 +1086,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1485,8 +1194,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
 <!--JAPON YENİ-->
 
 
@@ -1502,7 +1209,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -1526,7 +1233,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1649,7 +1356,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -1673,7 +1380,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1799,7 +1506,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -1823,7 +1530,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1947,7 +1654,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -1971,7 +1678,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -2097,7 +1804,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            background-color: white;
             color: #ffc107;
         }
 
@@ -2121,7 +1828,7 @@
         .chart-container {
             margin-top: 30px;
             margin-bottom: 20px;
-            background-color: black;
+            background-color: white;
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -2243,7 +1950,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000;
+            background-color: white;
             color: #fff;
             margin: 0;
             padding: 0;
@@ -2266,7 +1973,7 @@
     </style>
 </head>
 <body>
-    <h1>Kripto Grafikler</h1>
+    <h1>Kripto Grafikleri</h1>
     <div id="charts-container"></div>
 
     <script>

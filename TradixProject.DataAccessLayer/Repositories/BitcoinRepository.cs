@@ -9,7 +9,7 @@ public class BitcoinRepository : IBitcoinRepository
 
     public BitcoinRepository(IConfiguration configuration)
     {
-        // Retrieve the connection string from appsettings.json
+       
         _connectionString = configuration.GetConnectionString("DefaultConnection");
     }
 

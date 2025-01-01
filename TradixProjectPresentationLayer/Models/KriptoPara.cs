@@ -12,7 +12,6 @@
         public bool Durum { get; set; }
     }
 
-
     // SINGLE RESPONSIBILITY PRINCIPLE (SRP): 
     // Bu model yalnızca veritabanındaki kripto para verilerini temsil eder.
     // İş mantığı, controller ya da service katmanlarında yer almalıdır.
